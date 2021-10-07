@@ -1,7 +1,8 @@
 import React from "react";
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
-
+import {defaultAccount} from "../models/customer_account";
 export const SignIn = (props) => {
+
 
     const initFormData = Object.freeze({
         username: "",
@@ -15,7 +16,14 @@ export const SignIn = (props) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(formData)
+        let da = new defaultAccount(0, "test", "test", 500,["latest", "2nd", "3rd", "4th", "oldest"]);
+        if(da.username===formData.username && da.password ===formData.password){
+            console.log("sign in success")
+            props.callback(da)
+        }
     }
+
 
     return(
         <Container className={"rounded w-50 bg-light align-content-center"} style={{marginTop: "10px"}}>
