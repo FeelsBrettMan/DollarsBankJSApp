@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
 import {defaultAccount} from "../models/customer_account";
 export const SignIn = (props) => {
 
@@ -9,6 +9,7 @@ export const SignIn = (props) => {
         password: "",
     })
     const [formData, updateFormData] = React.useState(initFormData)
+    const [showError, setShowError] = React.useState(false)
 
     const handleChange = (e) => {
         updateFormData({...formData,
@@ -17,17 +18,20 @@ export const SignIn = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(formData)
-        let da = new defaultAccount(0, "test", "test", 500,["latest", "2nd", "3rd", "4th", "oldest"]);
-        if(da.username===formData.username && da.password ===formData.password){
-            console.log("sign in success")
-            props.callback(da)
+        let account
+        props.accountArray.forEach((current)=>{if(formData.username===current.username && formData.password ===current.password) account= current})
+        if(account){
+            setShowError(false)
+            props.setAccount(account)
+        }
+        else {
+            setShowError(true)
         }
     }
 
 
     return(
         <Container className={"rounded w-50 bg-light align-content-center"} style={{marginTop: "10px"}}>
-            {localStorage.getItem("userId") ===null ?
                 <Form>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formGridEmail">
@@ -44,12 +48,9 @@ export const SignIn = (props) => {
                     <Button variant="primary" type="submit" onClick={handleSubmit}>
                         Submit
                     </Button>
-                </Form> : <h3>You are signed in!</h3>
-            }
-
+                    {showError ? <Alert variant={"danger"}>Incorrect username and password pair!</Alert>: null}
+                </Form>
         </Container>
-
-
     )
 }
 

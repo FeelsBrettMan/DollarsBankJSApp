@@ -19,15 +19,26 @@ export const TransferModel = (props) =>{
         console.log(formData)
         if(parseInt(formData.toAccount)=== props.account.id){
             setShowSelfTransferError(true)
+            setShowAccountNotFoundError(false)
+
         }
         else{
-            props.transfer(formData.amount, formData.toAccount)
+            if(props.accountIDArray.find((current)=> current === parseInt(formData.toAccount))){
+                props.transfer(formData.amount, formData.toAccount)
+                setShowAccountNotFoundError(false)
+                setShowSelfTransferError(false)
+            }
+            else{
+                setShowAccountNotFoundError(true)
+                setShowSelfTransferError(false)
+            }
         }
     }
 
 
     const [show, setShow] = useState(false)
     const [showSelfTransferError, setShowSelfTransferError] = useState(false)
+    const [showAccountNotFoundError, setShowAccountNotFoundError]= useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
@@ -58,6 +69,8 @@ export const TransferModel = (props) =>{
                             </Form.Group>
                         </Row>
                         {showSelfTransferError ? <Alert variant={"danger"}>Can't transfer to self!</Alert>: null}
+                        {showAccountNotFoundError ? <Alert variant={"danger"}>Can't transfer to non-existent account!</Alert>: null}
+
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridAmount">
                                 <Form.FloatingLabel label={"Enter amount"}>

@@ -14,9 +14,7 @@ function App() {
     ]
 
     const [account, setAccount] = React.useState(accountArray[0])
-    const signInCallback = (e) =>{
-        console.log(e)
-    }
+
 
     const transactionCallback = (transType, amount, transferAccount) =>{
         account.doTransaction(transType, amount, transferAccount)

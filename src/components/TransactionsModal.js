@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Col, Form, ListGroup, Modal, Row} from "react-bootstrap";
+import {Button,  ListGroup, Modal} from "react-bootstrap";
 
 export const TransactionsModal = (props) =>{
 
