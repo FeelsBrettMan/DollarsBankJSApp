@@ -23,12 +23,14 @@ export const TransferModel = (props) =>{
 
         }
         else{
-            if(props.accountIDArray.find((current)=> current === parseInt(formData.toAccount))){
+            if(props.accountIDArray.find((current)=> current === parseInt(formData.toAccount))!==undefined){
                 props.transfer(formData.amount, formData.toAccount)
                 setShowAccountNotFoundError(false)
                 setShowSelfTransferError(false)
+                handleClose()
             }
             else{
+                console.log(props.accountIDArray.find((current)=> current===4))
                 setShowAccountNotFoundError(true)
                 setShowSelfTransferError(false)
             }

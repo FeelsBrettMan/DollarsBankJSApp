@@ -18,6 +18,7 @@ export const IOModal = (props) =>{
         else{
            props.deposit(amount)
         }
+        handleClose()
     }
 
 

@@ -1,6 +1,5 @@
 import React from "react";
 import {Alert, Button, Col, Container, Form, Row} from "react-bootstrap";
-import {defaultAccount} from "../models/customer_account";
 export const SignIn = (props) => {
 
 
@@ -17,7 +16,6 @@ export const SignIn = (props) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
         let account
         props.accountArray.forEach((current)=>{if(formData.username===current.username && formData.password ===current.password) account= current})
         if(account){

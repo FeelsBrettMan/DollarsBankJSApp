@@ -1,7 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {SignIn} from "./components/SignIn";
 import React from "react";
 import {Menu} from "./components/Menu";
 import {defaultAccount} from "./models/customer_account";
@@ -13,10 +12,11 @@ function App() {
         new defaultAccount(1, "test2", "test2", 100,["initial"])
     ]
 
-    const [account, setAccount] = React.useState(accountArray[0])
+    const addAccount = (username, password) =>{
+        accountArray.push(new defaultAccount(accountArray.length, username, password, 0, ["ACCOUNT CREATED"]))
+    }
 
-
-    const transactionCallback = (transType, amount, transferAccount) =>{
+    const transactionCallback = (account, transType, amount, transferAccount) =>{
         account.doTransaction(transType, amount, transferAccount)
         if(transferAccount){
             transferAccount.doTransaction("transferFrom", amount, account)
@@ -24,9 +24,7 @@ function App() {
     }
         return (
     <div className="App">
-        {//<SignIn callback={signInCallback}/>
-        }
-        <Menu account={account} transaction={transactionCallback} accountArray={accountArray}/>
+        <Menu transaction={transactionCallback} accountArray={accountArray} addAccount={addAccount}/>
         <Button variant={"primary"} onClick={()=> console.log(accountArray)}>LOG ACCOUNTS</Button>
     </div>
   );
