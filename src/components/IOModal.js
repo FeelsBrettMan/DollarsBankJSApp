@@ -39,14 +39,16 @@ export const IOModal = (props) =>{
                     <Form onSubmit={handleSubmit}>
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridDesc">
+                                <Form.FloatingLabel label={"Enter amount"}>
                                     <Form.Control
-                                        name={"description"}
-                                        type={"number"}
-                                        min ={"0"}
-                                        placeholder="Enter amount"
-                                        style={{ height: '100px' }}
-                                        onChange={handleChange}
-                                    />
+                                            name={"amount"}
+                                            type={"number"}
+                                            min ={"0"}
+                                            placeholder="Enter amount"
+                                            style={{ height: '100px' }}
+                                            onChange={handleChange}
+                                        />
+                                </Form.FloatingLabel>
                             </Form.Group>
                         </Row>
                         <Row className="mb-3">

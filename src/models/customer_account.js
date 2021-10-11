@@ -56,4 +56,28 @@ export class defaultAccount {
             this._history.shift();
         }
     }
+
+    doTransaction = (transType, amount, transferAccount) =>{
+        console.log(transType + ": "+ amount)
+        switch (transType){
+            case "withdraw":
+                this.balance = this.balance - amount
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" WITHDRAW: $"+amount)
+                break
+            case "deposit":
+                this.balance = this.balance + amount
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" DEPOSIT: $"+amount)
+                break
+            case "transferTo":
+                this.balance = this.balance - amount
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" TRANSFER: $"+amount + " TO ACCOUNT: " + transferAccount)
+                break
+            case "transferFrom":
+                this.balance = this.balance + amount
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" TRANSFER: $"+amount + " FROM ACCOUNT: " + transferAccount)
+                break
+            default:
+                console.log("ERROR invalid operation")
+        }
+    }
 }

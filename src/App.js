@@ -9,13 +9,17 @@ import {Button} from "react-bootstrap";
 function App() {
 
 
-    const [account, setAccount] = React.useState(new defaultAccount(0, "test", "test", 500,["latest", "2nd", "3rd", "4th", "oldest"]))
+    const [account, setAccount] = React.useState(new defaultAccount(0, "test", "test", 500,["initial"]))
+    const account2 = new defaultAccount(1, "test2", "test2", 100,["initial"])
     const signInCallback = (e) =>{
         console.log(e)
     }
-    const transactionCallback = (balance, transactionString) =>{
-        account.balance = balance;
-        account.addHistory(transactionString)
+
+    const transactionCallback = (transType, amount, transferAccount) =>{
+        account.doTransaction(transType, amount, transferAccount)
+        if(transferAccount){
+            transferAccount.doTransaction("transferFrom", amount, account)
+        }
     }
         return (
     <div className="App">
