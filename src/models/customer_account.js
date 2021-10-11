@@ -62,19 +62,19 @@ export class defaultAccount {
         switch (transType){
             case "withdraw":
                 this.balance = this.balance - amount
-                this.addHistory("TIME: "+ new Date().toLocaleString()+" WITHDRAW: $"+amount)
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" | WITHDRAW: $"+amount)
                 break
             case "deposit":
                 this.balance = this.balance + amount
-                this.addHistory("TIME: "+ new Date().toLocaleString()+" DEPOSIT: $"+amount)
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" | DEPOSIT: $"+amount)
                 break
             case "transferTo":
                 this.balance = this.balance - amount
-                this.addHistory("TIME: "+ new Date().toLocaleString()+" TRANSFER: $"+amount + " TO ACCOUNT: " + transferAccount)
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" | TRANSFER: $"+amount + " TO ACCOUNT: " + transferAccount.id)
                 break
             case "transferFrom":
                 this.balance = this.balance + amount
-                this.addHistory("TIME: "+ new Date().toLocaleString()+" TRANSFER: $"+amount + " FROM ACCOUNT: " + transferAccount)
+                this.addHistory("TIME: "+ new Date().toLocaleString()+" | TRANSFER: $"+amount + " FROM ACCOUNT: " + transferAccount.id)
                 break
             default:
                 console.log("ERROR invalid operation")

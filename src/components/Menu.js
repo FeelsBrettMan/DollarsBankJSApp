@@ -2,7 +2,7 @@ import React from "react";
 import {Container} from "react-bootstrap";
 import {IOModal} from "./IOModal";
 import {TransferModel} from "./TransferModel";
-import {logDOM} from "@testing-library/react";
+import {TransactionsModal} from "./TransactionsModal";
 
 export const Menu = (props) =>{
     const depositCallback = (amount)=>{
@@ -29,6 +29,7 @@ export const Menu = (props) =>{
             <IOModal type={"deposit"} deposit={depositCallback}/>
             <IOModal type={"withdraw"} withdraw={withdrawCallback}/>
             <TransferModel account={props.account} transfer={transferCallback}/>
+            <TransactionsModal account={props.account}/>
 
         </Container>
     )
