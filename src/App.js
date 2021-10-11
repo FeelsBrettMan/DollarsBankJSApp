@@ -8,9 +8,12 @@ import {defaultAccount} from "./models/customer_account";
 import {Button} from "react-bootstrap";
 function App() {
 
+    const accountArray = [
+        new defaultAccount(0, "test", "test", 500,["initial"]),
+        new defaultAccount(1, "test2", "test2", 100,["initial"])
+    ]
 
-    const [account, setAccount] = React.useState(new defaultAccount(0, "test", "test", 500,["initial"]))
-    const account2 = new defaultAccount(1, "test2", "test2", 100,["initial"])
+    const [account, setAccount] = React.useState(accountArray[0])
     const signInCallback = (e) =>{
         console.log(e)
     }
@@ -25,8 +28,8 @@ function App() {
     <div className="App">
         {//<SignIn callback={signInCallback}/>
         }
-        <Menu account={account} transaction={transactionCallback}/>
-        <Button variant={"primary"} onClick={()=> console.log(account)}>LOG ACCOUNT</Button>
+        <Menu account={account} transaction={transactionCallback} accountArray={accountArray}/>
+        <Button variant={"primary"} onClick={()=> console.log(accountArray)}>LOG ACCOUNTS</Button>
     </div>
   );
 }

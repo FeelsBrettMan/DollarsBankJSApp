@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Col, Form, Modal, Row} from "react-bootstrap";
+import {Alert, Button, Col, Form, Modal, Row} from "react-bootstrap";
 
 export const TransferModel = (props) =>{
     const defaultFormData = {
@@ -17,10 +17,17 @@ export const TransferModel = (props) =>{
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log(formData)
+        if(parseInt(formData.toAccount)=== props.account.id){
+            setShowSelfTransferError(true)
+        }
+        else{
+            props.transfer(formData.amount, formData.toAccount)
+        }
     }
 
 
     const [show, setShow] = useState(false)
+    const [showSelfTransferError, setShowSelfTransferError] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
@@ -50,6 +57,7 @@ export const TransferModel = (props) =>{
                                 </Form.FloatingLabel>
                             </Form.Group>
                         </Row>
+                        {showSelfTransferError ? <Alert variant={"danger"}>Can't transfer to self!</Alert>: null}
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="formGridAmount">
                                 <Form.FloatingLabel label={"Enter amount"}>
