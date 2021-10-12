@@ -42,10 +42,12 @@ export const SignIn = (props) => {
                             <Form.Control type="password" placeholder="Password" name={"password"} onChange={handleChange}/>
                         </Form.Group>
                     </Row>
+                    <Row style={{margin: "10px"}}>
+                        <Button variant="primary" type="submit" onClick={handleSubmit}>
+                            Submit
+                        </Button>
+                    </Row>
 
-                    <Button variant="primary" type="submit" onClick={handleSubmit}>
-                        Submit
-                    </Button>
                     {showError ? <Alert variant={"danger"}>Incorrect username and password pair!</Alert>: null}
                 </Form>
         </Container>

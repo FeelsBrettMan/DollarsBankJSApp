@@ -15,7 +15,7 @@ export const AccountDataModal = (props) =>{
 
             <Modal show={show} onHide={handleClose} size={'lg'}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Transaction history</Modal.Title>
+                    <Modal.Title>Account information</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <ListGroup>

@@ -41,7 +41,7 @@ export const SignUp = (props) => {
     }
 
     return(
-        <Container className={"rounded w-50 align-content-center"} style={{marginTop: "10px", backgroundColor:"#3F434B"}}>
+        <Container className={"rounded w-50 bg-light align-content-center"} style={{marginTop: "10px"}}>
             <Form>
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridEmail">
@@ -60,10 +60,12 @@ export const SignUp = (props) => {
                         <Form.Control type="password" placeholder="Re-enter password" name={"confirmPassword"} onChange={handleChange}/>
                     </Form.Group>
                 </Row>
+                <Row>
+                    <Button variant="primary" type="submit" onClick={handleSubmit} >
+                        Submit
+                    </Button>
+                </Row>
 
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
-                    Submit
-                </Button>
                 { showWarning ? <Alert variant={'danger'}>Passwords do not match!</Alert> : null}
                 { showAccountExistError ? <Alert variant={'danger'}>Username unavailable! Please try a different one!</Alert> : null}
             </Form>

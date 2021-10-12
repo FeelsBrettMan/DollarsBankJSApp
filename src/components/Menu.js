@@ -1,5 +1,5 @@
 import React from "react";
-import {Alert, Button, Container} from "react-bootstrap";
+import {Alert, Button, Container, Stack} from "react-bootstrap";
 import {IOModal} from "./IOModal";
 import {TransferModel} from "./TransferModel";
 import {TransactionsModal} from "./TransactionsModal";
@@ -52,7 +52,7 @@ export const Menu = (props) =>{
     return (
         <Container>
             {account!=null ?
-                <Container>
+                <Stack gap={3}>
                     <IOModal type={"deposit"} deposit={depositCallback}/>
                     <IOModal type={"withdraw"} withdraw={withdrawCallback}/>
                     <TransferModel account={account} accountIDArray={accountIdArray()} transfer={transferCallback}/>
@@ -60,7 +60,7 @@ export const Menu = (props) =>{
                     <AccountDataModal account={account}/>
                     <Button onClick={signOut}>Sign out</Button>
 
-                </Container>:
+                </Stack>:
                 <Container>
                     {showSignIn ?
                         <Container>
@@ -68,9 +68,9 @@ export const Menu = (props) =>{
                             <SignIn setAccount={setAccount} accountArray={props.accountArray}/>
                             <Button onClick={()=>{setShowSignIn(false)}}>Sign up</Button>
                         </Container> :
-                        <Container>
-                            <SignUp addAccount={addAccount} accountArray={props.accountArray}/>
-                            <Button onClick={()=>{setShowSignIn(true)}}>Sign in</Button>
+                        <Container >
+                            <SignUp addAccount={addAccount} accountArray={props.accountArray} />
+                            <Button style={{ margin: "10px", padding:"10px"}} onClick={()=>{setShowSignIn(true)}}>Sign in</Button>
                         </Container>}
                 </Container>}
 

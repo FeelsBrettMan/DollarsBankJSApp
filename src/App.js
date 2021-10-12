@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import {Menu} from "./components/Menu";
 import {defaultAccount} from "./models/customer_account";
-import {Button} from "react-bootstrap";
+import {Container, Stack} from "react-bootstrap";
 function App() {
 
     const accountArray = [
@@ -24,8 +24,13 @@ function App() {
     }
         return (
     <div className="App">
-        <Menu transaction={transactionCallback} accountArray={accountArray} addAccount={addAccount}/>
-        <Button variant={"primary"} onClick={()=> console.log(accountArray)}>LOG ACCOUNTS</Button>
+        <Container className={"rounded w-50 bg-light align-content-center"} style={{marginTop: "10px"}}>
+            <Stack direction={"horizontal"} gap={3}>
+                <Menu transaction={transactionCallback} accountArray={accountArray} addAccount={addAccount}/>
+            </Stack>
+
+        </Container>
+
     </div>
   );
 }
