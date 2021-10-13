@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {Button, Col, Form, Modal, Row} from "react-bootstrap";
+import { Button, Col, Form, Modal, Row} from "react-bootstrap";
 
 export const IOModal = (props) =>{
 
 
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount] = useState("0")
 
     const handleChange = (e) => {
         setAmount(e.target.value)
@@ -14,17 +14,22 @@ export const IOModal = (props) =>{
         e.preventDefault()
         if(props.type ==="withdraw"){
             props.withdraw(amount)
+            handleClose()
         }
         else{
            props.deposit(amount)
+            handleClose()
+
         }
-        handleClose()
     }
 
 
     const [show, setShow] = useState(false)
-    const handleClose = () => setShow(false)
+    const handleClose = () => {
+        setShow(false)
+    }
     const handleShow = () => setShow(true)
+
 
 
 

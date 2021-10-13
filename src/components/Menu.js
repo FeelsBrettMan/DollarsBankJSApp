@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Alert, Button, Container, Stack} from "react-bootstrap";
 import {IOModal} from "./IOModal";
 import {TransferModel} from "./TransferModel";
@@ -8,29 +8,38 @@ import {SignUp} from "./SignUp";
 import {AccountDataModal} from "./AccountDataModal";
 
 export const Menu = (props) =>{
-    const [account, setAccount] = React.useState(null)
-    const [showSignIn, setShowSignIn] = React.useState(true)
-    const [showAccountCreated, setShowAccountCreated] = React.useState(false)
-
+    const [account, setAccount] = useState(null)
+    const [showSignIn, setShowSignIn] = useState(true)
+    const [showAccountCreated, setShowAccountCreated] = useState(false)
+    const [showAmountError, setShowAmountError] = useState(false)
 
 
 
     const depositCallback = (amount)=>{
-        //props.transaction(props.account.balance + parseInt(amount),"TIME: "+ new Date().toLocaleString()+" DEPOSIT: $"+amount)
-        props.transaction(account, "deposit", parseInt(amount), null)
+
+        props.transaction(account, "deposit", parseFloat(amount), null)
+        setShowAmountError(false)
     }
     const withdrawCallback = (amount)=>{
-        //props.transaction(props.account.balance - parseInt(amount),"TIME: "+ new Date().toLocaleString()+" DEPOSIT: $"+amount)
-        props.transaction(account, "withdraw", parseInt(amount), null)
+        if(parseFloat(amount)<=account.balance){
+            props.transaction(account, "withdraw", parseFloat(amount), null)
+            setShowAmountError(false)
 
+        }
+        else setShowAmountError(true)
     }
     const transferCallback = (amount, toAccountNum) => {
-        let toAccount
-        props.accountArray.forEach((current)=> {
-            if(parseInt(toAccountNum)===current.id){
-                toAccount = current
-            }})
-        props.transaction(account, "transferTo", parseInt(amount), toAccount)
+        if(parseFloat(amount)<=account.balance) {
+            let toAccount
+            props.accountArray.forEach((current) => {
+                if (parseInt(toAccountNum) === current.id) {
+                    toAccount = current
+                }
+            })
+            props.transaction(account, "transferTo", parseFloat(amount), toAccount)
+            setShowAmountError(false)
+        }
+        else setShowAmountError(true)
     }
     const accountIdArray = () =>{
         let accountIds = []
@@ -53,8 +62,9 @@ export const Menu = (props) =>{
         <Container>
             {account!=null ?
                 <Stack gap={3}>
+                    {showAmountError && <Alert variant={"danger"}> TRANSACTION FAILED: Can not withdraw or transfer more than balance!</Alert>}
                     <IOModal type={"deposit"} deposit={depositCallback}/>
-                    <IOModal type={"withdraw"} withdraw={withdrawCallback}/>
+                    <IOModal type={"withdraw"} withdraw={withdrawCallback} balance={account.balance}/>
                     <TransferModel account={account} accountIDArray={accountIdArray()} transfer={transferCallback}/>
                     <TransactionsModal account={account}/>
                     <AccountDataModal account={account}/>

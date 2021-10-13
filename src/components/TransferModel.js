@@ -20,17 +20,15 @@ export const TransferModel = (props) =>{
         if(parseInt(formData.toAccount)=== props.account.id){
             setShowSelfTransferError(true)
             setShowAccountNotFoundError(false)
-
         }
         else{
             if(props.accountIDArray.find((current)=> current === parseInt(formData.toAccount))!==undefined){
-                props.transfer(formData.amount, formData.toAccount)
-                setShowAccountNotFoundError(false)
-                setShowSelfTransferError(false)
-                handleClose()
+                    props.transfer(formData.amount, formData.toAccount)
+                    setShowAccountNotFoundError(false)
+                    setShowSelfTransferError(false)
+                    handleClose()
             }
             else{
-                console.log(props.accountIDArray.find((current)=> current===4))
                 setShowAccountNotFoundError(true)
                 setShowSelfTransferError(false)
             }
@@ -41,7 +39,11 @@ export const TransferModel = (props) =>{
     const [show, setShow] = useState(false)
     const [showSelfTransferError, setShowSelfTransferError] = useState(false)
     const [showAccountNotFoundError, setShowAccountNotFoundError]= useState(false)
-    const handleClose = () => setShow(false)
+    const handleClose = () =>{
+        setShowAccountNotFoundError(false)
+        setShowSelfTransferError(false)
+        setShow(false)
+    }
     const handleShow = () => setShow(true)
 
 
